@@ -1,0 +1,582 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Dietin API Documentation",
+    "version": "1.0",
+    "description": "This is dietin api app",
+    "contact": {
+      "name": "Dietin",
+      "url": "www.dietin.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{status}.dietin.com/api/v1",
+      "description": "Dietin Restful API Server",
+      "variables": {
+        "status": {
+          "default": "dev",
+          "description": "Server environtment",
+          "enum": ["dev", "prod"]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/history": {
+      "get": {
+        "tags": ["History"],
+        "security": [
+          {
+            "historyAuth": []
+          }
+        ],
+        "summary": "Get all history data",
+        "description": "Only return array all of history scan data",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/queryStatus"
+          },
+          {
+            "$ref": "#/components/parameters/queryDatetime"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "When success fetching history datas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAllHistory"
+                },
+                "examples": {
+                  "allData": {
+                    "$ref": "#/components/examples/successGetData"
+                  },
+                  "lectineData": {
+                    "$ref": "#/components/examples/successGetLectineData"
+                  },
+                  "nonlectineData": {
+                    "$ref": "#/components/examples/successGetNonLectineData"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error user not login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "$ref": "#/components/examples/unauthorizedData"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["History"],
+        "security": [
+          {
+            "historyAuth": []
+          }
+        ],
+        "summary": "Save scan history",
+        "description": "Only save one of history data when user finished scan",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "multipart/formdata": {
+              "schema": {
+                "$ref": "#/components/schemas/createHistory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Create history has been success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createHistory"
+                },
+                "examples": {
+                  "lectine": {
+                    "$ref": "#/components/examples/insertLectineFood"
+                  },
+                  "nonlectine": {
+                    "$ref": "#/components/examples/insertNonLectineFood"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error user not login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "$ref": "#/components/examples/unauthorizedData"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/history/{historyId}": {
+      "get": {
+        "tags": ["History"],
+        "security": [
+          {
+            "historyAuth": []
+          }
+        ],
+        "summary": "Get spesific history using uniqueId",
+        "description": "Only get one history data with unique id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/scanId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success to get one history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/detailResponse"
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/successGetDetail"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Failed get history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteResponse"
+                },
+                "examples": {
+                  "failed": {
+                    "$ref": "#/components/examples/failedDeleteData"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error user not login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "$ref": "#/components/examples/unauthorizedData"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["History"],
+        "security": [
+          {
+            "historyAuth": []
+          }
+        ],
+        "summary": "Delete spesific history using uniqueId",
+        "description": "Only delete one history data with unique id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/scanId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success to delete history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteResponse"
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/successDeleteData"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Failed delete history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteResponse"
+                },
+                "examples": {
+                  "failed": {
+                    "$ref": "#/components/examples/failedDeleteData"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error user not login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "$ref": "#/components/examples/unauthorizedData"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "unauthorizedResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ingredientsSchema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ingredientLectineStatus": {
+              "type": "boolean"
+            },
+            "ingredientName": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "detailResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "foodName": {
+            "type": "string"
+          },
+          "lectineStatus": {
+            "type": "boolean"
+          },
+          "foodPhoto": {
+            "type": "string"
+          },
+          "ingredients": {
+            "$ref": "#/components/schemas/ingredientsSchema"
+          }
+        }
+      },
+      "deleteResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "createHistory": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "foodName": {
+            "type": "string"
+          },
+          "lectineStatus": {
+            "type": "boolean"
+          },
+          "foodPhoto": {
+            "type": "string",
+            "format": "base64"
+          },
+          "ingredients": {
+            "$ref": "#/components/schemas/ingredientsSchema"
+          }
+        }
+      },
+      "getAllHistory": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          },
+          "datas": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "foodName": {
+                  "type": "string"
+                },
+                "lectineStatus": {
+                  "type": "boolean"
+                },
+                "foodPhoto": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "successGetData": {
+        "description": "Example when success get all history data",
+        "value": {
+          "status": 200,
+          "message": "all history scan food",
+          "datas": [
+            {
+              "id": "507f191e810c19729de860ea",
+              "foodName": "rendang",
+              "lectineStatus": true,
+              "foodPhoto": "rendang.jpg"
+            },
+            {
+              "id": "507f191e810c19729de8604a",
+              "foodName": "vegetables salad",
+              "lectineStatus": false,
+              "foodPhoto": "salad.jpg"
+            }
+          ]
+        }
+      },
+      "successGetDetail": {
+        "description": "Example when success get one detail history",
+        "value": {
+          "id": "507f191e810c19729de860ea",
+          "foodName": "rendang",
+          "lectineStatus": true,
+          "foodPhoto": "rendang.jpg",
+          "ingredients": [
+            {
+              "ingredientLectineStatus": true,
+              "ingredientName": "Daging Sapi"
+            },
+            {
+              "ingredientLectineStatus": false,
+              "ingredientName": "Lengkuas"
+            }
+          ]
+        }
+      },
+      "successGetLectineData": {
+        "description": "Example when success get all lectine history data",
+        "value": {
+          "status": 200,
+          "message": "all history scan food",
+          "datas": [
+            {
+              "id": "507f191e810c19729de860ea",
+              "foodName": "rendang",
+              "lectineStatus": true,
+              "foodPhoto": "rendang.jpg"
+            },
+            {
+              "id": "507f191e810c19729dyrjc604a",
+              "foodName": "gado gado",
+              "lectineStatus": true,
+              "foodPhoto": "gadogado.jpg"
+            }
+          ]
+        }
+      },
+      "successGetNonLectineData": {
+        "description": "Example when success get all lectine history data",
+        "value": {
+          "status": 200,
+          "message": "all history scan food",
+          "datas": [
+            {
+              "id": "507f191e810c1972s7746860ea",
+              "foodName": "vegetables salad",
+              "lectineStatus": false,
+              "foodPhoto": "salad.jpg"
+            },
+            {
+              "id": "507f191e810c197294648hnd4a",
+              "foodName": "fruits salad",
+              "lectineStatus": false,
+              "foodPhoto": "fruitsalad.jpg"
+            }
+          ]
+        }
+      },
+      "insertLectineFood": {
+        "description": "Create scan lectine food",
+        "value": {
+          "userId": "reuuryyfbjjdhhsye747482ndang",
+          "foodName": "rendang",
+          "lectineStatus": true,
+          "foodPhoto": "rendang.jpg",
+          "ingredients": [
+            {
+              "ingredientLectineStatus": true,
+              "ingredientName": "Daging Sapi"
+            },
+            {
+              "ingredientLectineStatus": false,
+              "ingredientName": "Lengkuas"
+            }
+          ]
+        }
+      },
+      "insertNonLectineFood": {
+        "description": "Crate scan non lectine food",
+        "value": {
+          "userId": "reuuryyfbjjdhhsye747482ndang",
+          "foodName": "sushi",
+          "lectineStatus": false,
+          "foodPhoto": "sushi.jpg",
+          "ingredients": [
+            {
+              "ingredientLectineStatus": false,
+              "ingredientName": "Kembang Kol"
+            },
+            {
+              "ingredientLectineStatus": false,
+              "ingredientName": "Lengkuas"
+            }
+          ]
+        }
+      },
+      "unauthorizedData": {
+        "description": "User cant access history data",
+        "value": {
+          "status": 401,
+          "message": "unauthorized: invalid credentials"
+        }
+      },
+      "successDeleteData": {
+        "description": "Success delete history",
+        "value": {
+          "status": 200,
+          "message": "history has been deleted"
+        }
+      },
+      "failedDeleteData": {
+        "description": "Failed delete history",
+        "value": {
+          "status": 404,
+          "message": "history is not found"
+        }
+      }
+    },
+    "parameters": {
+      "scanId": {
+        "name": "historyId",
+        "required": true,
+        "description": "Delete sepsific history",
+        "in": "path",
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "examples": {
+          "lectine": {
+            "description": "History id for lectine food",
+            "value": "507f191e810c19729de860ea"
+          },
+          "nonlectine": {
+            "description": "History id for non lectine food",
+            "value": "507f191e81365c19729de860ea"
+          }
+        }
+      },
+      "queryStatus": {
+        "name": "status",
+        "description": "See spesific datas using status filter",
+        "required": false,
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "nullable": false,
+          "minLength": 1
+        },
+        "examples": {
+          "lectine": {
+            "value": true
+          },
+          "nonlectine": {
+            "value": false
+          }
+        }
+      },
+      "queryDatetime": {
+        "name": "datetime",
+        "description": "See spesific datas using datetime filter",
+        "required": false,
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "historyAuth": {
+        "description": "Authentication when user want to get history data",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
