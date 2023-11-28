@@ -1,5 +1,5 @@
-import { getFirestore, collection, getDocs } from "firebase/firestore";
 import admin from "../model/firebase.js";
+import { storage } from "../model/storage.js";
 
 const getHistories = async (req, res) => {
   try {
@@ -26,39 +26,6 @@ const getHistories = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-try {
-  const userId = req.user.uid;
-  const { description, image } = req.body;
-
-  const newHistoryRef = await admin.firestore().collection("histories").add({
-    userId,
-    description,
-  });
-
-  const historyId = newHistoryRef.id;
-
-  const imageBuffer = Buffer.from(image, "base64");
-  const file = admin.storage().bucket().file(fileName);
-
-  await file.save(imageBuffer, {
-    metadata: {
-      contentType: "image/jpeg",
-    },
-  });
-
-  const imageUrl = `https://storage.googleapis.com/${file.bucket.name}/${file.name}`;
-
-  await newHistoryRef.update({ imageUrl });
-
-  res.status(201).json({
-    status: 201,
-    message: "History created successfully",
-    data: { historyId, imageUrl },
-  });
-} catch (error) {
-  console.error("Error creating history:", error);
-  res.status(500).json({ error: "Internal server error" });
-}
 
 const getHistory = async (req, res) => {
   try {
@@ -92,6 +59,49 @@ const getHistory = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching history:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const createHistory = async (req, res) => {
+  try {
+    const userId = req.user.uid;
+    const { foodName, lectineStatus, ingredients } = req.body;
+
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    const bucket = storage.bucket("dietin-capstone.appspot.com");
+    const foodPhoto = `food-scan/${new Date().getTime()}-${
+      req.file.originalname
+    }`;
+    const file = bucket.file(foodPhoto);
+
+    const stream = file.createWriteStream({
+      metadata: {
+        contentType: req.file.mimetype,
+      },
+    });
+
+    stream.end(req.file.buffer);
+    const imageUrl = `https://storage.googleapis.com/${bucket.name}/${foodPhoto}`;
+
+    await admin.firestore().collection("histories").add({
+      userId,
+      foodName,
+      lectineStatus,
+      imageUrl,
+      ingredients,
+    });
+
+    res.status(201).json({
+      status: 201,
+      message: "History created successfully",
+      data: { userId, foodName, lectineStatus, foodPhoto, ingredients },
+    });
+  } catch (error) {
+    console.error("Error creating history:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
