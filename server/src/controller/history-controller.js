@@ -13,12 +13,19 @@ const getHistories = async (req, res) => {
 
     const histories = [];
     historiesSnapshot.forEach((doc) => {
-      histories.push(doc.data());
+      const { foodName, lectineStatus, foodPhoto } = doc.data();
+      const selectedField = {
+        id: doc.id,
+        foodName,
+        lectineStatus,
+        foodPhoto,
+      };
+      histories.push(selectedField);
     });
 
     res.status(200).json({
       status: 200,
-      message: "all histories for the user",
+      message: "all histories scan food",
       datas: histories,
     });
   } catch (error) {
@@ -39,7 +46,7 @@ const getHistory = async (req, res) => {
     if (!historyDoc.exists) {
       return res.status(404).json({
         status: 404,
-        message: "History not found",
+        message: "History is not found",
       });
     }
 
@@ -54,7 +61,7 @@ const getHistory = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "History retrieved successfully",
+      message: "History detail data",
       data: historyData,
     });
   } catch (error) {
@@ -91,7 +98,7 @@ const createHistory = async (req, res) => {
       userId,
       foodName,
       lectineStatus,
-      imageUrl,
+      foodPhoto: imageUrl,
       ingredients,
     });
 
@@ -135,7 +142,7 @@ const deleteHistory = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "History deleted successfully",
+      message: "History has been deleted",
     });
   } catch (error) {
     console.error("Error deleting history:", error);

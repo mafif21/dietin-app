@@ -296,20 +296,31 @@
       "detailResponse": {
         "type": "object",
         "properties": {
-          "id": {
+          "status": {
+            "type": "number"
+          },
+          "message": {
             "type": "string"
           },
-          "foodName": {
-            "type": "string"
-          },
-          "lectineStatus": {
-            "type": "boolean"
-          },
-          "foodPhoto": {
-            "type": "string"
-          },
-          "ingredients": {
-            "$ref": "#/components/schemas/ingredientsSchema"
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "foodName": {
+                "type": "string"
+              },
+              "lectineStatus": {
+                "type": "boolean"
+              },
+              "foodPhoto": {
+                "type": "string"
+              },
+              "ingredients": {
+                "$ref": "#/components/schemas/ingredientsSchema"
+              }
+            }
           }
         }
       },
@@ -327,21 +338,32 @@
       "createHistory": {
         "type": "object",
         "properties": {
-          "userId": {
+          "status": {
+            "type": "number"
+          },
+          "message": {
             "type": "string"
           },
-          "foodName": {
-            "type": "string"
-          },
-          "lectineStatus": {
-            "type": "boolean"
-          },
-          "foodPhoto": {
-            "type": "string",
-            "format": "base64"
-          },
-          "ingredients": {
-            "$ref": "#/components/schemas/ingredientsSchema"
+          "data": {
+            "type": "object",
+            "properties": {
+              "userId": {
+                "type": "string"
+              },
+              "foodName": {
+                "type": "string"
+              },
+              "lectineStatus": {
+                "type": "boolean"
+              },
+              "foodPhoto": {
+                "type": "string",
+                "format": "base64"
+              },
+              "ingredients": {
+                "$ref": "#/components/schemas/ingredientsSchema"
+              }
+            }
           }
         }
       },
@@ -402,20 +424,24 @@
       "successGetDetail": {
         "description": "Example when success get one detail history",
         "value": {
-          "id": "507f191e810c19729de860ea",
-          "foodName": "rendang",
-          "lectineStatus": true,
-          "foodPhoto": "rendang.jpg",
-          "ingredients": [
-            {
-              "ingredientLectineStatus": true,
-              "ingredientName": "Daging Sapi"
-            },
-            {
-              "ingredientLectineStatus": false,
-              "ingredientName": "Lengkuas"
-            }
-          ]
+          "status": 200,
+          "message": "history detail data",
+          "data": {
+            "id": "507f191e810c19729de860ea",
+            "foodName": "rendang",
+            "lectineStatus": true,
+            "foodPhoto": "rendang.jpg",
+            "ingredients": [
+              {
+                "ingredientLectineStatus": true,
+                "ingredientName": "Daging Sapi"
+              },
+              {
+                "ingredientLectineStatus": false,
+                "ingredientName": "Lengkuas"
+              }
+            ]
+          }
         }
       },
       "successGetLectineData": {
@@ -463,20 +489,24 @@
       "insertLectineFood": {
         "description": "Create scan lectine food",
         "value": {
-          "userId": "reuuryyfbjjdhhsye747482ndang",
-          "foodName": "rendang",
-          "lectineStatus": true,
-          "foodPhoto": "rendang.jpg",
-          "ingredients": [
-            {
-              "ingredientLectineStatus": true,
-              "ingredientName": "Daging Sapi"
-            },
-            {
-              "ingredientLectineStatus": false,
-              "ingredientName": "Lengkuas"
-            }
-          ]
+          "status": 201,
+          "message": "history created successfully",
+          "data": {
+            "userId": "reuuryyfbjjdhhsye747482",
+            "foodName": "rendang",
+            "lectineStatus": true,
+            "foodPhoto": "rendang.jpg",
+            "ingredients": [
+              {
+                "ingredientLectineStatus": true,
+                "ingredientName": "Daging Sapi"
+              },
+              {
+                "ingredientLectineStatus": false,
+                "ingredientName": "Lengkuas"
+              }
+            ]
+          }
         }
       },
       "insertNonLectineFood": {
