@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { historyRouter } from "./routes/routes.js";
 
 const app = express();
+const port = process.env.PORT || 8080;
+// const host = process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0";
 dotenv.config();
 
 app.use(express.static("./food-scan"));
@@ -13,5 +15,5 @@ app.use(express.json());
 app.use("/api", historyRouter);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Server is live ${process.env.PORT}`);
+  console.log(`Server is running at ${port}`);
 });
