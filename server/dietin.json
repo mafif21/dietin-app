@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://{status}.dietin.com/api/v1",
+      "url": "https://{status}.dietin.com/api",
       "description": "Dietin Restful API Server",
       "variables": {
         "status": {
