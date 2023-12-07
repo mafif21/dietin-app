@@ -4,21 +4,36 @@ import { storage } from "../model/storage.js";
 const getHistories = async (req, res) => {
   try {
     const userId = req.user.uid;
+    const { status, date } = req.query;
 
-    const historiesSnapshot = await admin
+    let query = await admin
       .firestore()
       .collection("histories")
-      .where("userId", "==", userId)
-      .get();
+      .where("userId", "==", userId);
+
+    if (status) {
+      query = query.where("lectineStatus", "==", status);
+    }
+
+    if (date === "latest") {
+      query = query.orderBy("createdAt", "desc");
+    } else if (date === "oldest") {
+      query = query.orderBy("createdAt", "asc");
+    } else {
+      query = query.orderBy("createdAt", "desc");
+    }
+
+    const historiesSnapshot = await query.get();
 
     const histories = [];
     historiesSnapshot.forEach((doc) => {
-      const { foodName, lectineStatus, foodPhoto } = doc.data();
+      const { foodName, lectineStatus, foodPhoto, createdAt } = doc.data();
       const selectedField = {
         id: doc.id,
         foodName,
         lectineStatus,
         foodPhoto,
+        createdAt,
       };
       histories.push(selectedField);
     });
@@ -33,6 +48,8 @@ const getHistories = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// const queryParams = (datas, {status, })
 
 const getHistory = async (req, res) => {
   try {
@@ -74,6 +91,7 @@ const createHistory = async (req, res) => {
   try {
     const userId = req.user.uid;
     const { foodName, lectineStatus, ingredients } = req.body;
+    const createdAt = new Date().toISOString();
 
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
@@ -100,12 +118,20 @@ const createHistory = async (req, res) => {
       lectineStatus,
       foodPhoto: imageUrl,
       ingredients,
+      createdAt,
     });
 
     res.status(201).json({
       status: 201,
       message: "History created successfully",
-      data: { userId, foodName, lectineStatus, foodPhoto, ingredients },
+      data: {
+        userId,
+        foodName,
+        lectineStatus,
+        foodPhoto,
+        ingredients,
+        createdAt,
+      },
     });
   } catch (error) {
     console.error("Error creating history:", error);
@@ -138,7 +164,17 @@ const deleteHistory = async (req, res) => {
       });
     }
 
+    const imageUrl = historyData.foodPhoto;
+    console.log(imageUrl);
+
     await historyRef.delete();
+
+    if (imageUrl) {
+      const bucket = storage.bucket("dietin-capstone.appspot.com");
+      const fileName = imageUrl.split("/").pop();
+      const file = bucket.file(`food-scan/${fileName}`);
+      await file.delete();
+    }
 
     res.status(200).json({
       status: 200,
