@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://{status}.dietin.com/api",
+      "url": "https://dietinapi-dcfx4qkera-et.a.run.app/api",
       "description": "Dietin Restful API Server",
       "variables": {
         "status": {
@@ -591,12 +591,20 @@
         }
       },
       "queryDatetime": {
-        "name": "datetime",
+        "name": "date",
         "description": "See spesific datas using datetime filter",
         "required": false,
         "in": "query",
         "schema": {
           "type": "string"
+        },
+        "examples": {
+          "new data": {
+            "value": "latest"
+          },
+          "old data": {
+            "value": "oldest"
+          }
         }
       }
     },
