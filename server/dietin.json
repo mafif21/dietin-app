@@ -392,6 +392,9 @@
                 },
                 "foodPhoto": {
                   "type": "string"
+                },
+                "createdAt": {
+                  "type": "string"
                 }
               }
             }
@@ -410,13 +413,15 @@
               "id": "507f191e810c19729de860ea",
               "foodName": "rendang",
               "lectineStatus": true,
-              "foodPhoto": "rendang.jpg"
+              "foodPhoto": "rendang.jpg",
+              "createdAt": "2023-12-08T04:43:15.041Z"
             },
             {
               "id": "507f191e810c19729de8604a",
               "foodName": "vegetables salad",
               "lectineStatus": false,
-              "foodPhoto": "salad.jpg"
+              "foodPhoto": "salad.jpg",
+              "createdAt": "2023-12-08T04:43:15.041Z"
             }
           ]
         }
@@ -603,7 +608,7 @@
             "value": "latest"
           },
           "old data": {
-            "value": "oldest"
+            "value": "latest"
           }
         }
       }
