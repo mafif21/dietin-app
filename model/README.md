@@ -5,9 +5,8 @@ The Part of Product Based Bangkit Capstone Project Team CH2-PS549
 
 ## Machine Learning Members
 
-
 | Name | Bangkit ID | Github|
-| ------ | ------ | | ------ | 
+|---|---|---| 
 | Shierra Intan Anggari | M128BSX1189 | [shierraanggari](https://github.com/shierraanggari) |
 | Muhammad Riziq Ramadhan | M128BSY1615 | [Soocotra](https://github.com/Soocotra) |
 | Fadlan Ahya Imani | M011BSY1869 | ? |
