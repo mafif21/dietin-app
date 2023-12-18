@@ -28,3 +28,8 @@ This API provides a history feature for applications that require recording and 
 4. Set your database in firestore
 5. Get your service account key.json to access all resource in GCP
 6. Run `npm run start` to start a server
+
+## Cloud Computing Members
+
+- [Muhammad Nurul Afif Maliki](https://www.github.com/mafif21)
+- [Shora](https://www.github.com/shora)
