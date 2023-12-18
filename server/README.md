@@ -32,4 +32,4 @@ This API provides a history feature for applications that require recording and 
 ## Cloud Computing Members
 
 - [Muhammad Nurul Afif Maliki](https://www.github.com/mafif21)
-- [Shora](https://www.github.com/shora)
+- [Shoraahatan Salsabila](https://www.github.com/shor12)
