@@ -31,5 +31,7 @@ This API provides a history feature for applications that require recording and 
 
 ## Cloud Computing Members
 
-- [Muhammad Nurul Afif Maliki](https://www.github.com/mafif21)
-- [Shoraahatan Salsabila](https://www.github.com/shor12)
+| Name                       | Bangkit ID  | Github                             |
+| -------------------------- | ----------- | ---------------------------------- |
+| Muhammad Nurul Afif Maliki | C012BSY3605 | [Afif](https://github.com/mafif21) |
+| Shoraahatan Salsabila      | C676BSX3192 | [Shora](https://github.com/shor12) |
