@@ -20,6 +20,7 @@ API ini menyediakan fitur history untuk aplikasi yang membutuhkan pencatatan dan
 ## How to Install
 
 1. git clone github repo
-2. Jalankan `npm install` untuk menginstal dependensi.
-3. Konfigurasikan file `.env` dengan detail database Anda.
-4. Jalankan `npm start` untuk memulai server.
+2. run `npm install` to install all depedencies
+3. Configure file `.env` to detail database
+4. Set your database in firestore
+5. Jalankan `npm run start` untuk memulai server.
