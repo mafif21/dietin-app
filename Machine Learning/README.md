@@ -9,7 +9,7 @@ The Part of Product Based Bangkit Capstone Project Team CH2-PS549
 |---|---|---| 
 | Shierra Intan Anggari | M128BSX1189 | [shierraanggari](https://github.com/shierraanggari) |
 | Muhammad Riziq Ramadhan | M128BSY1615 | [Soocotra](https://github.com/Soocotra) |
-| Fadlan Ahya Imani | M011BSY1869 | [FadlanAhya](github.com/fadlan-ahya) |
+| Fadlan Ahya Imani | M011BSY1869 | [FadlanAhya](https://github.com/fadlan-ahya) |
 ## Table of Content
 1. [Project Overview](#project-overview)
 2. [Dataset](#dataset)
