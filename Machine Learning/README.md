@@ -48,6 +48,10 @@ They were collected from various sources:
 - [Indonesian Food Image](https://data.mendeley.com/datasets/vtjd68bmwt/1)
 - [food-image-classification-dataset](https://www.kaggle.com/datasets/harishkumardatalab/food-image-classification-dataset)
 - Scraping on google
+
+We merged all the dataset above inside this link below:
+[Merged Dataset](https://nopladi-index.vercel.app/api/raw/?path=/dataset/indonesian_foods_v3.zip)
+
 ## Data Preprocessing
 
 To enhance the robustness of our models, we employed the following data preprocessing techniques: [**ImageDataGenerator**](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator). We utilized this powerful tool for:
