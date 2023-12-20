@@ -50,7 +50,7 @@ To enhance the robustness of our models, we employed the following data preproce
 For time efficiency and code optimization, we created an IndonesianFoodDataset class in the data_preprocessing.py file. Here is an example of basic usage:
 
 ```
-data = IndonesianFoodDataset(dataset_path='/content/drive/MyDrive/indonesian_foods', split_size=0.7)
+data = IndonesianFoodDataset(dataset_path='/content/drive/MyDrive/indonesian_foods', split_size=(0.8, 0.1, 0.1))
 train_set, val_set, test_set = data.load_data(target_size=(224,224))
 ```
 This class will extracts the dataset, copies it to the /dataset/temp_set folder, and renames the files appropriately. The load_data() function then divides the data into training (80%), validation (10%), and test (10%) sets based on the specified split size.
