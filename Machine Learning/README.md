@@ -10,10 +10,18 @@ The Part of Product Based Bangkit Capstone Project Team CH2-PS549
 | Shierra Intan Anggari | M128BSX1189 | [shierraanggari](https://github.com/shierraanggari) |
 | Muhammad Riziq Ramadhan | M128BSY1615 | [Soocotra](https://github.com/Soocotra) |
 | Fadlan Ahya Imani | M011BSY1869 | [FadlanAhya](github.com/fadlan-ahya) |
+## Table of Content
+1. [Project Overview](#project-overview)
+2. [Dataset](#dataset)
+3. [Data Preprocessing](#data-preprocessing)
+4. [Transfer Learning and Fine-Tuning](#transfer-learning-and-fine-tuning)
+5. [Model Evaluation](#model-performance-evaluation)
+6. [Model Deployment](#model-deployment)
 
 ## Project Overview
-We present an Indonesian dishes image classification system developed using TensorFlow that classifies and recognizes 16 different classes of images. In the initial phase, we employed three distinct Transfer Learning Architectures—InceptionV3, Nasnetmobile, and DenseNet121. Our primary objective was to implement Transfer Learning and fine-tuning strategies suitable for our relatively small dataset.
+We present an Indonesian dishes image classification system developed using TensorFlow that classifies and recognizes 16 different classes of images. In the initial phase, we employed three different Architectures—InceptionV3, Nasnetmobile, and DenseNet121. Our primary objective was to implement Transfer Learning for image classification and fine-tuning strategies suitable for our relatively small dataset.
 
+## Dataset
 The dataset comprises 11027 images distributed across 16 classes, including:
 - Ayam Bakar
 - Bakso
@@ -32,7 +40,7 @@ The dataset comprises 11027 images distributed across 16 classes, including:
 - Sayur Asem
 - Semur Jengkol
 
-They are collected from different sources:
+They were collected from various sources:
 - [Indonesian Food](https://www.kaggle.com/datasets/rizkashintaw/indonesian-food)
 - [INDONESIAN FOOD](https://www.kaggle.com/datasets/theresalusiana/indonesian-food)
 - [makanan-ibu-food-detection](https://www.kaggle.com/datasets/aveivein/makanan-ibu-food-detection)
