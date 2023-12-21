@@ -46,6 +46,9 @@ To install the DietIn application, please download the latest APK file from our 
 
 ![Apps Architecture](./img/arc.png)
 
-## Demo Apps
+## Important Links
 
-[Demo Video](https://drive.google.com/drive/folders/1XUF1yNhcsPEIHMlnfuPMPSrDt_fzRzTx)
+- [Cloud Computing Github](https://github.com/mafif21/dietin-app/tree/main/server)
+- [Machine Learning Github](https://github.com/mafif21/dietin-app/tree/main/model)
+- [Mobile Development Github](https://github.com/fitristachan/DietIn)
+- [Demo Video](https://drive.google.com/drive/folders/1XUF1yNhcsPEIHMlnfuPMPSrDt_fzRzTx)
